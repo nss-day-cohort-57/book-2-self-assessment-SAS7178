@@ -2,11 +2,37 @@
     Remember to use comments to define the algorithm(s) needed
     BEFORE you write any code
 */
-const calculateYearlyExpenses = () => { }
-
-const calculateExpensesPercentage = () => { }
-
-const isQualified = () => { }
+//function that will allow to multiply 'monthly expenses' of each obj
+// by 12 to get annaul expenses
+//purpose srp: get each applicants annaul expenses
+//para: method that iterates through applicantsArray
+//return: applicant.annual value
+const calculateYearlyExpenses = (applicant) => { 
+    applicant.annual = applicant.monthlyExpenses * 12  
+    return applicant.annual;
+}   
+//function 
+//purpose srp: determine 
+//para: aplllicant Object, yearly expenses
+//return: percentage of expenses to salary
+const calculateExpensesPercentage = (applicant, yearlyExpenses) => {
+      const sum = yearlyExpenses/applicant.salary
+        const expensesToSalaryPercent = sum * 100
+        return expensesToSalaryPercent; 
+    }
+// function: to test whether the applicant is qualified 
+// purpose srp: 
+//para:applicant Object, expensesToSalaryPercent
+//returns: modified applicant object
+const isQualified = (applicant, expensesToSalaryPercent) => {
+if (expensesToSalaryPercent < 10){
+    applicant.mortgage.qualified = true,
+    applicant.mortgage.amount = applicant.salary * 5
+} else if (expensesToSalaryPercent > 10) {
+    applicant.mortgage.qualified = false,
+      applicant.mortgage.amount = 0 }
+      return applicant;
+ }
 
 const mortgageApplicants = [
     { id: 1, name: "James Runolfsdottir", monthlyExpenses: 343.7, salary: 49938.68, mortgage: {}, address: "866 Weissnat Forks", city: "South Dario" },
@@ -22,35 +48,31 @@ const mortgageApplicants = [
     { id: 11, name: "Becky Wiegand", monthlyExpenses: 212.27, salary: 76137.45, mortgage: {}, address: "3972 Stroman Parks", city: "West Clotildeport" },
 ]
 
+const applicants = () => {
+    let qualifiedApplicants = ``
+    for (const applicant of mortgageApplicants) {
+      const annualExpenses = calculateYearlyExpenses(applicant)
+      const expensesPercentage = calculateExpensesPercentage(applicant, annualExpenses)
+      const qualified = isQualified(applicant, expensesPercentage)
+      
+      if(qualified.mortgage.qualified) {
+         qualifiedApplicants += `${applicant.name} is qualified for a maximum mortage of ${applicant.mortgage.amount }\n `
+      }
+    }
+    return qualifiedApplicants;
+}
+
+let qualifiedApplicant = applicants()
+console.log(qualifiedApplicant)
+
+
+
+
+
 /*
     Iterate the array of mortgage applicants and use your
     functions to determine if they are qualified for a mortgage
 */
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 
 
 
